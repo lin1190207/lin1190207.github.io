@@ -390,13 +390,14 @@
 
         
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <!-- 移除async属性以确保脚本正确加载 -->
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
       <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
+        总访客数：<span id="busuanzi_value_site_uv"></span> 人
       </span>
     </span>
     <span class="post-meta-divider">|</span>
@@ -405,9 +406,28 @@
         <i class="fa fa-eye"></i>
       </span>
       <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
+        总访问量：<span id="busuanzi_value_site_pv"></span> 次
       </span>
     </span>
+  
+  <!-- 添加额外的JS来确保统计正常工作 -->
+  <script type="text/javascript">
+    // 确保不蒜子计数器正确初始化
+    if (typeof busuanzi !== 'undefined') {
+      busuanzi.fetch(
+        'site_pv',
+        function(data) {
+          document.getElementById('busuanzi_value_site_pv').innerText = data;
+        }
+      );
+      busuanzi.fetch(
+        'site_uv',
+        function(data) {
+          document.getElementById('busuanzi_value_site_uv').innerText = data;
+        }
+      );
+    }
+  </script>
 </div>
 
 
